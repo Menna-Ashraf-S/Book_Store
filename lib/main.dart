@@ -201,89 +201,107 @@ class _HomeState extends State < Home > {
                         Book book = Book.fromMap(snapshot.data[index]);
 
 
-                        return ListTile(
-                       leading: 
-                       Container(
-                              width: 120,
-                              height: 130 ,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey ,width: 1 ,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                  ),
-      
-                              child: ClipRRect( borderRadius: BorderRadius.circular (20),
-                                child: Image.network('${book.url}' ,
-                              fit: BoxFit.cover, width: 120,height: 130 ,),
-                              )
-                             ),
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 10 , bottom: 10 ,),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.only(left: 10 , right: 10),
                         
-
-                          title: Text('${book.name} ',
+                                child: Container(
+                                width: 120,
+                                height: 130 ,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.grey ,width: 1 ,
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(15),
+                                    ),
+                                    ),
+                              
+                                child: ClipRRect( borderRadius: BorderRadius.circular (20),
+                                  child: Image.network('${book.url}' ,
+                                fit: BoxFit.cover, width: 120,height: 130 ,),
+                                )
+                               ),
+                        
+                                ),
+                                SizedBox(width: 5,),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text('${book.name} ',
+                            style: TextStyle(
+                              fontWeight:FontWeight.bold , fontSize: 21,
+                            ),
+                            ),
+                        
+                            SizedBox(height: 5,),
+                        
+                            Text('Author : ${book.author} ',
                           style: TextStyle(
-                            fontWeight:FontWeight.bold , fontSize: 20,
+                            color: Color.fromARGB(255, 126, 126, 126),fontSize: 18 ,
                           ),
-
-                          ),
-
-                        subtitle: Text('Author : ${book.author} ',
-                        style: TextStyle(
-                          color: Colors.grey , fontSize: 15 ,
-                        ),
-                        ) ,
-                        trailing: IconButton(
-                          icon: Icon(Icons.delete , color: Colors.grey, size: 25,),
-                          onPressed: (){
-                            showDialog(
-                        context: context, 
-                        builder: (BuildContext context){
-                          return AlertDialog(
-                            title:
-                             Text ('Delete Book',style: TextStyle(fontSize: 25)),
-                            content:
-                             Text('Are you sure you want to delete this book ?',
-                             style: TextStyle(
-                              fontSize: 20,color: Colors.grey[700],
-                              ),
-                              ),
-                            actions: 
-                            <Widget>[
-                              TextButton( 
-                                child: 
-                                Text('Cancel',
-                                style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold ,
+                          ) ,
+                        
+                                  ],
                                   ),
-                                  ), 
-
-                              onPressed: (){Navigator.of(context).pop();
-                              },
-
-                              ),
-
-                              TextButton( 
-                                child: 
-                                Text('Yes',
-                                style: TextStyle(
-                                  color: Colors.red,fontSize: 20, fontWeight: FontWeight.bold ,
-                                  ),
-                                  ),
-                              onPressed: (){
-                                 if (book.id !=null){
-                                helper.delete(book.id??-1);
-                              }
-                              },
-                              ),
-                            ],
+                        
+                                  SizedBox(width: 15,) ,
+                        
+                                  IconButton(
+                            icon: Icon( Icons.delete , color: Color.fromARGB(255, 126, 126, 126), size: 35,),
+                            onPressed: (){
+                              showDialog(
+                          context: context, 
+                          builder: (BuildContext context){
+                            return AlertDialog(
+                              title:
+                               Text ('Delete Book',style: TextStyle(fontSize: 25)),
+                              content:
+                               Text('Are you sure you want to delete this book ?',
+                               style: TextStyle(
+                                fontSize: 20,color: Colors.grey[700],
+                                ),
+                                ),
+                              actions: 
+                              <Widget>[
+                                TextButton( 
+                                  child: 
+                                  Text('Cancel',
+                                  style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold ,
+                                    ),
+                                    ), 
+                        
+                                onPressed: (){Navigator.of(context).pop();
+                                },
+                        
+                                ),
+                        
+                                TextButton( 
+                                  child: 
+                                  Text('Yes',
+                                  style: TextStyle(
+                                    color: Colors.red,fontSize: 20, fontWeight: FontWeight.bold ,
+                                    ),
+                                    ),
+                                onPressed: (){
+                                   if (book.id !=null){
+                                  helper.delete(book.id??-1);
+                                }
+                                },
+                                ),
+                              ],
+                            );
+                          }
                           );
-                        }
-                        );
-                          },
-                         ),
-                         onTap: () {},
+                            },
+                           ),
+                        
+                            ],
+                            ),
                         );
 
                       }
